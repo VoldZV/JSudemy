@@ -1,8 +1,17 @@
 // Lesson 12.1
 
-let numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?','');
+let numberOfFilms;
 
-//Lesson 12.2
+function start () {
+    numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?','');
+
+    while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
+        numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?','');
+    }
+}
+
+start()
+
 let personalMovieDB = {
     count: numberOfFilms,
     movies: {},
@@ -11,20 +20,19 @@ let personalMovieDB = {
     privat: false
 }
 
-if (personalMovieDB.count < 10) {
-    alert ('Маловато')
-} else if (personalMovieDB.count > 30) {
-    alert ('Достаточно много')
-} else if (personalMovieDB.count >= 10 && personalMovieDB.count <= 30){
-    alert ('Среднее количество')
-} else {
-    alert ('ERROR')
+function detectFilmLevel () {
+    if (personalMovieDB.count < 10) {
+        alert ('Маловато')
+    } else if (personalMovieDB.count > 30) {
+        alert ('Достаточно много')
+    } else if (personalMovieDB.count >= 10 && personalMovieDB.count <= 30){
+        alert ('Среднее количество')
+    } else {
+        alert ('ERROR')
+    }
 }
 
-//Lesson 12.3
-// Lesson 15
-
-
+detectFilmLevel ()
 
 // for (let i=0; i < 2; i++) {
 //     let oneOfFilm
@@ -60,13 +68,35 @@ if (personalMovieDB.count < 10) {
 //     personalMovieDB.movies[oneOfFilm] = filmScore;
 // }
 
-for (let i = 0 ; i < 2 ; i++) {
-    let oneOfFilm = prompt('Один из последних просмотренных фильмов?', '')
-    let filmScore = prompt('Оцените фильм от 1 до 10', '')
-    if (oneOfFilm != '' && filmScore != '' && oneOfFilm != null && filmScore != null && oneOfFilm.length < 30) {
-        personalMovieDB.movies[oneOfFilm] = filmScore
-    } else {
-        console.log('error') 
-        i--
+function rememberMyFilms () {
+    for (let i = 0 ; i < 2 ; i++) {
+        let oneOfFilm = prompt('Один из последних просмотренных фильмов?', '')
+        let filmScore = prompt('Оцените фильм от 1 до 10', '')
+        if (oneOfFilm != '' && filmScore != '' && oneOfFilm != null && filmScore != null && oneOfFilm.length < 30) {
+            personalMovieDB.movies[oneOfFilm] = filmScore
+        } else {
+            console.log('error') 
+            i--
+        }
     }
 }
+
+rememberMyFilms()
+
+function showMyDB () {
+    if (personalMovieDB.privat == false) {
+        console.log(personalMovieDB);
+    }
+}
+
+function writeYourGenres () {
+    
+    for (let i = 0; i<3 ; i++) {
+        let genre = prompt(`Ваш любимый жанр под номером ${i+1}`)
+        personalMovieDB.genres[i] = genre;
+    }
+}
+
+writeYourGenres()
+
+showMyDB()
