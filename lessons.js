@@ -11,3 +11,10 @@ let personalMovieDB = {
     privat: false
 }
 
+//Lesson 12.3
+
+let oneOfFilm = prompt('Один из последних просмотренных фильмов?', '');
+let filmScore = prompt('Оцените данный фильм от 0 до 10','');
+
+personalMovieDB.movies['movie'] = oneOfFilm;
+personalMovieDB.movies['logan'] = filmScore;
