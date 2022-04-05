@@ -16,5 +16,4 @@ let personalMovieDB = {
 let oneOfFilm = prompt('Один из последних просмотренных фильмов?', '');
 let filmScore = prompt('Оцените данный фильм от 0 до 10','');
 
-personalMovieDB.movies['movie'] = oneOfFilm;
-personalMovieDB.movies['logan'] = filmScore;
+personalMovieDB.movies[oneOfFilm] = filmScore;
