@@ -41,9 +41,9 @@ let personalMovieDB = {
             }
         }
     },
-    showMyDB () {
+    showMyDB (print) {
         if (personalMovieDB.privat == false) {
-            console.log(personalMovieDB);
+            console.log(print);
         }
     },
     writeYourGenres () {
