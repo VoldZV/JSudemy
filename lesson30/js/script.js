@@ -55,7 +55,7 @@ const movieList = document.querySelectorAll('.promo__interactive-item')
 movieDB.movies.sort()
 
 movieList.forEach((index,i) => {
-    index.innerHTML = `${i+1}) ` + movieDB.movies[i]
+    index.innerHTML = `${i+1}) ` + movieDB.movies[i] + `<div class="delete"></div>`
 })
 
 //Также возможно было очистить общий элемент и потом наполнить его
@@ -71,3 +71,58 @@ movieList.forEach((index,i) => {
 // }
 
 
+//LESSON 33
+
+const inputValues = document.querySelector('.adding__input')
+
+const addButton = document.querySelector('.add button')
+addButton.setAttribute('type', 'reset') // отменяет атрибут type = submit
+
+const filmListElement = document.querySelector('.promo__interactive-list');
+
+
+
+addButton.addEventListener('click', (event) => {
+    // event.preventDefault(); // отменить стандартное поведение - обновление страницы
+    let inputValue = inputValues.value;
+    if (inputValues.value) {
+       
+        
+        if (inputValue.length > 15) {
+            inputValue = inputValue.substr(0,15) + '...'
+        }
+        movieDB.movies.push(inputValue);
+        movieDB.movies.sort();
+        const newFilm = document.createElement('li');
+        newFilm.classList.add('promo__interactive-item');
+        filmListElement.append(newFilm);
+        const newMovieList = document.querySelectorAll('.promo__interactive-item');
+        newMovieList.forEach((index,i) => {
+            index.innerHTML = `${i+1}) ` + movieDB.movies[i] + `<div class="delete"></div>`
+        });
+        if (document.querySelector('input[type = "checkbox"]').checked) {
+            console.log(`Добавлен любимый фильм: ${inputValue}`);
+            
+        } else {
+         console.log(`Добавлен фильм ${inputValue}`)
+        };
+    }
+    
+    
+})
+
+filmListElement.addEventListener('click', function (event) {
+    if(event.target.closest('.promo__interactive-item:hover .delete')) {
+        console.log('Удален фильм: ' + event.target.parentElement.textContent.slice(3))
+        event.target.parentElement.remove();
+        movieDB.movies = [];
+        const newFilmList = document.querySelectorAll('.promo__interactive-item');
+        newFilmList.forEach((index, i) => {
+            index.innerHTML = `${i+1}) ` + index.innerHTML.slice(3);
+            movieDB.movies[i] = index.textContent.slice(3)
+        });
+        // console.log(movieDB.movies);
+    } else {
+        console.log('не попал на корзину')
+    }
+});
